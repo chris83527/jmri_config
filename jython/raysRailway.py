@@ -116,6 +116,8 @@ class MyShutDownTask(jmri.implementation.AbstractShutDownTask):
             turnout.removePropertyChangeListener(listener)
             turnout.setState(UNKNOWN)
 
+        powermanager.setPower(jmri.PowerManager.off)
+
         return
 
 
