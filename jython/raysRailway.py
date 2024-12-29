@@ -114,7 +114,7 @@ class MyShutDownTask(jmri.implementation.AbstractShutDownTask):
         turnoutList = turnouts.getNamedBeanSet()
         for turnout in turnoutList:
             turnout.removePropertyChangeListener(listener)
-            turnout.setState(THROWN)
+            turnout.setState(UNKNOWN)
 
         return
 
