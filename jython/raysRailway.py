@@ -111,12 +111,15 @@ class MyShutDownTask(jmri.implementation.AbstractShutDownTask):
         for sensor in sensorList:
             sensor.removePropertyChangeListener(listener)
 
+        self.log.info("Shutting down turnouts")
         turnoutList = turnouts.getNamedBeanSet()
         for turnout in turnoutList:
-            turnout.removePropertyChangeListener(listener)
             turnout.setState(UNKNOWN)
+            turnout.removePropertyChangeListener(listener)
 
-        powermanager.setPower(jmri.PowerManager.off)
+
+        self.log.info("Swotcjomg pff track power")
+        powermanager.setPower(jmri.PowerManager.OFF)
 
         return
 
@@ -213,6 +216,8 @@ class RaysRailway(jmri.jmrit.automat.AbstractAutomaton):
 
             # Set ready LED to on
             output.high()
+
+            powermanager.setPower(jmri.PowerManager.ON)
         except java.lang.reflect.UndeclaredThrowableException:
             self.log.info("error")
 
